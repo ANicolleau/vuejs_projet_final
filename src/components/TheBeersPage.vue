@@ -38,12 +38,14 @@
 <script>
 import BeerDisplay from "./BeerDisplay"
 import axios from 'axios';
-
-
+import filterStore from "@/store/filters";
 export default {
 	name: "TheBeersPage",
 	components: {
 		BeerDisplay
+	},
+	store: {
+		filterStore
 	},
 	data() {
 		return {
