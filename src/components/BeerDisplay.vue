@@ -123,7 +123,46 @@ export default {
 					}
 				},
 				twist: null
-			}
+			},
+			ingredients: {
+				malt: [
+					{
+						"name": "Extra Pale",
+						"amount": {
+							"value": 5.3,
+							"unit": "kilograms"
+						}
+					}
+				],
+				hops: [
+					{
+						"name": "Ahtanum",
+						"amount": {
+							"value": 17.5,
+							"unit": "grams"
+						},
+						"add": "start",
+						"attribute": "bitter"
+					},
+					{
+						"name": "Chinook",
+						"amount": {
+							"value": 15,
+							"unit": "grams"
+						},
+						"add": "start",
+						"attribute": "bitter"
+					}
+				],
+				yeast: "Wyeast 1056 - American Ale™"
+			},
+			food_pairing: [
+				"Spicy carne asada with a pico de gallo sauce",
+				"Shredded chicken tacos with a mango chilli lime salsa",
+				"Cheesecake with a passion fruit swirl sauce"
+			],
+			brewers_tips: "While it may surprise you, this version of Punk IPA isn't dry hopped but still packs a punch! To make the best of the aroma hops make sure they are fully submerged and add them just before knock out for an intense hop hit.",
+			contributed_by: "Sam Mason <samjbmason>"
 		};
 	},
 }
