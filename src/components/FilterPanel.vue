@@ -78,7 +78,8 @@
 					<input class="dropdown-menu-dark w-100" v-model="message" placeholder="edit me"/>
 				</div>
 				<div class="col-6 align-middle">
-					<button class="btn btn-success w-100">Search</button>
+				<br>
+				<button class="btn btn-success w-100">Search</button>
 				</div>
 			</div>
 		</div>
