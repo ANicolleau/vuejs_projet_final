@@ -4,24 +4,20 @@
 	</div>
 	<div class="row mt-3">
 		<div class="col bg-dark p-5">
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
+			<TheBeersPage/>
 		</div>
 	</div>
 </template>
 
 <script>
-import BeerDisplay from "@/components/BeerDisplay";
 import FilterPanel from "@/components/FilterPanel";
+import TheBeersPage from "@/components/TheBeersPage";
+
 export default {
 	name: 'App',
 	components: {
+		TheBeersPage,
 		FilterPanel,
-		BeerDisplay
 	}
 }
 </script>
