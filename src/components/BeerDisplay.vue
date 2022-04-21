@@ -13,7 +13,7 @@
 				v-for="tag in thisBeer.tagline.split('. ')" v-bind:key="tag">{{ tag }}</span>
 				</div>
 				<div class="text-start mt-5">
-					<span class="fw-bold" style="font-size: 20px">Brassé la première fois:</span><span
+					<span class="fw-bold" style="font-size: 20px">Brewed for the first time:</span><span
 					style="font-size: 20px; margin-left: 10px">{{ thisBeer.first_brewed }}</span>
 				</div>
 				<div class="text-start mt-2">
@@ -33,93 +33,90 @@
 					<div class="text-start mt-4">
 						<h3>Informations:</h3>
 					</div>
-
 					<div class="row">
 						<div class="col-6">
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">ABV (Taux d'alcool):</span><span
+								<span class="fw-bold">ABV (Alcohol By Volume):</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.abv }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">target_fg:</span><span
+								<span class="fw-bold">Final Gravity:</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.target_fg }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">EBC (Indice d'évaluation de la couleur de la biere):</span><span
+								<span class="fw-bold">EBC (European Brewery Convention):</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.ebc }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">ph:</span><span style="font-size: 20px; margin-left: 10px">{{
+								<span class="fw-bold">pH:</span><span style="font-size: 20px; margin-left: 10px">{{
 									thisBeer.ph
 								}}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">volume:</span><span
+								<span class="fw-bold">Volume:</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.volume.value }} {{
 									thisBeer.boil_volume.unit
 								}}</span>
 							</div>
-
 						</div>
 						<div class="col-6" style="border-left: solid black 3px">
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">IBU (Taux d'amertume):</span><span
+								<span class="fw-bold">IBU (International Bitterness Unit):</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.ibu }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">target_og:</span><span
+								<span class="fw-bold">Original Gravity:</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.target_og }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">srm:</span><span style="font-size: 20px; margin-left: 10px">{{
+								<span class="fw-bold">Standard Reference Method:</span><span style="font-size: 20px; margin-left: 10px">{{
 									thisBeer.srm
 								}}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">attenuation_level:</span><span
+								<span class="fw-bold">Attenuation (brewing):</span><span
 								style="font-size: 20px; margin-left: 10px">{{ thisBeer.attenuation_level }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">boil_volume:</span><span style="font-size: 20px; margin-left: 10px">{{
-									thisBeer.boil_volume.value
-								}} {{ thisBeer.boil_volume.unit }}</span>
+								<span class="fw-bold">Boil Volume:</span>
+								<span style="font-size: 20px; margin-left: 10px">{{
+										thisBeer.boil_volume.value
+									}} {{ thisBeer.boil_volume.unit }}</span>
 							</div>
 						</div>
 					</div>
 					<div class="text-start mt-4">
-						<h3>Methode:</h3>
+						<h3>Preparation Method:</h3>
 					</div>
 					<div class="row">
 						<div class="col-6">
 							<div class="row text-light" style="margin-left: 15px; margin-right: 15px; background-image: radial-gradient( circle farthest-corner at -4% -12.9%,  rgba(74,98,110,1) 0.3%, rgba(30,33,48,1) 90.2% ); border-radius: 10px">
 								<div class="col-12" v-for="(item, index) in thisBeer.method.mash_temp" v-bind:item="item" v-bind:index="index" :key="item">
 									<div class="row">
-										<div class="col-12 text-start mt-2 mb-0"><h5>Puré [ {{ index + 1 }} ]</h5></div>
+										<div class="col-12 text-start mt-2 mb-0"><h5>[ {{ index + 1 }} ]</h5></div>
 									</div>
 									<div class="row">
 										<div class="col-6 text-start mt-0 - mb-1">
-											<span class="fw-bold">Température de la cuisson de la puré:</span><span
+											<span class="fw-bold">Mash Temperature:</span><span
 											style="font-size: 15px; margin-left: 10px">{{ item.temp.value }} {{ item.temp.unit }}</span>
 										</div>
 										<div class="col-6 text-start mt-0 - mb-1">
-											<span class="fw-bold">Duré de la cuisson de la puré:</span><span
+											<span class="fw-bold">Duration:</span><span
 											style="font-size:15px; margin-left: 10px">{{ item.duration }} minutes</span>
 										</div>
 									</div>
-
 								</div>
 							</div>
-
 						</div>
 						<div class="col-6" style="border-left: solid black 3px">
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">Température de la fermentation:</span><span
+								<span class="fw-bold">Fermentation Temperature:</span><span
 								style="font-size: 15px; margin-left: 10px">{{
 									thisBeer.method.fermentation.temp.value
 								}} {{ thisBeer.method.fermentation.temp.unit }}</span>
 							</div>
 							<div class="text-start mt-2 - mb-2">
-								<span class="fw-bold">Mélange:</span><span
+								<span class="fw-bold">Twist:</span><span
 								style="font-size: 15px; margin-left: 10px">{{ thisBeer.method.twist ? "Oui" : "Non" }}</span>
 							</div>
 						</div>
@@ -127,7 +124,7 @@
 					<div class="row">
 						<div class="col-6">
 							<div class="text-start mt-4 mb-3">
-								<h3>Ingrédients:</h3>
+								<h3>Ingredients:</h3>
 							</div>
 							<div class="row text-light mt-2" style="margin-left: 15px; margin-right: 15px; background-image: radial-gradient( circle 610px at 5.2% 51.6%,  rgba(5,8,114,1) 0%, rgba(7,3,53,1) 97.5% );; border-radius: 10px" v-for="(value, name) in thisBeer.ingredients" :key="value">
 								<div class="col-12 text-start">
@@ -161,18 +158,17 @@
 											</div>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</div>
 						<div class="col-6 text-start">
 							<div class="mt-4 mb-3">
-								<h3>Autres:</h3>
+								<h3>Other:</h3>
 							</div>
 							<div class="row">
 								<div class="col-12" style="padding-left: 25px;">
 									<div class="mb-3">
-										<h5>Aliments qui accompagnent adéquatement:</h5>
+										<h5>Food Pairing</h5>
 									</div>
 									<div class="row">
 										<div class="col-12">
@@ -188,7 +184,7 @@
 							<div class="row">
 								<div class="col-12" style="padding-left: 25px;">
 									<div class="mb-3">
-										<h5>Conseil du brasseur:</h5>
+										<h5>Brewers Tips:</h5>
 									</div>
 									<div class="row">
 										<div class="col-12" style="padding-left: 30px;">{{ thisBeer.brewers_tips }}</div>
@@ -198,7 +194,7 @@
 							<div class="row mt-3">
 								<div class="col-12" style="padding-left: 25px;">
 									<div class="mb-3">
-										<h5>Contributeur:</h5>
+										<h5>Contributed By:</h5>
 									</div>
 									<div class="row">
 										<div class="col-12" style="padding-left: 30px;">{{ thisBeer.contributed_by }}</div>
