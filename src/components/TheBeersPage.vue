@@ -3,7 +3,6 @@
     <p>Nous sommes désolés, nous ne sommes pas en mesure de récupérer les informations depuis l'api
       https://api.punkapi.com/v2/beers. Veuillez réessayer ultérieurement.</p>
   </section>
-
   <section v-else>
     <div v-if="loading">Chargement...</div>
 
@@ -17,7 +16,6 @@
     <div class="row mt-3">
       <div class="col bg-dark p-5">
         <div class="row mt-3" v-for="beer in beers" :key="beer.id">
-          {{ beer.id }}
           <BeerDisplay :thisBeer="beer"/>
         </div>
         <nav aria-label="Page navigation example">
