@@ -1,9 +1,11 @@
 <template>
-	<div class="row mt-3">
-		<FilterPanel/>
+	<div class="row m-0 p-0 mt-3">
+		<div class="col-12">
+			<FilterPanel/>
+		</div>
 	</div>
-	<div class="row mt-3">
-		<div class="col bg-dark p-5">
+	<div class="row m-0 p-0 mt-3">
+		<div class="col-12">
 			<TheBeersPage/>
 		</div>
 	</div>

@@ -5,34 +5,33 @@
 	</section>
 
 	<section v-else>
-		<div v-if="loading">Chargement...</div>
-
-		<!--		<div class="row mt-3">-->
-		<!--			<div class="col bg-info" style="height: 500px">-->
-		<!--				<button class="btn btn-primary" @click="applyFilters">-->
-		<!--					Apply filters-->
-		<!--				</button>-->
-		<!--			</div>-->
-		<!--		</div>-->
-
-		<div class="row mt-3" v-for="beer in beers" :key="beer.id">
-			<BeerDisplay :thisBeer="beer"/>
+		<div class="mb-3 row justify-content-md-center">
+			<div class="col-1">
+				<button class="page-link" href="#" :disabled="actualPage === 1" @click="previousPage">
+					Previous
+				</button>
+			</div>
+			<div class="col-1">
+				<button class="page-link">
+					{{ nbBeerBeginPage }} - {{ nbBeerEndPage }}
+				</button>
+			</div>
+			<div class="col-1">
+				<button class="page-link" href="#" :disabled="isLastPage" @click="nextPage">
+					Next
+				</button>
+			</div>
 		</div>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item">
-					<button class="page-link" href="#" :disabled="actualPage === 1" @click="previousPage">
-						Previous
-					</button>
-					<button class="page-link">
-						{{ nbBeerBeginPage }} - {{ nbBeerEndPage }}
-					</button>
-					<button class="page-link" href="#" :disabled="isLastPage" @click="nextPage">
-						Next
-					</button>
-				</li>
-			</ul>
-		</nav>
+		<div class="row m-2 bg-light" style="border: solid 1px lightgrey; border-radius: 25px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;height: 65vh; overflow: scroll">
+			<div class="col-12">
+				<div v-if="loading">Chargement...</div>
+				<div class="row mt-3" v-for="beer in beers" :key="beer.id">
+					<div class="col-12 p-3">
+						<BeerDisplay :thisBeer="beer"/>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-	<div class="h-100 w-100 rounded-3 bg-light" style="">
-		<div class="row">
-			<div class="col-2 p-0">
+	<div class="w-100 h-100" style="box-sizing: border-box; border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; background-color: #f1f1f1">
+		<div class="row p-2">
+			<div class="col-2">
 				<div
 					style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% ); border-radius: 15px;"
 					class="m-2"><img v-bind:src="thisBeer.image_url" class="img-fluid p-3" style="max-width: 200px; max-height: 300px" alt="Responsive image"></div>
@@ -9,8 +9,7 @@
 			<div class="col-10">
 				<h2 class="text-start mt-3">{{ thisBeer.name }}</h2>
 				<div class="text-start" style="margin-left: 10px;">
-          <span class="label label-default bg-dark text-light rounded-3 p-1 m-1"
-				v-for="tag in thisBeer.tagline.split('. ')" v-bind:key="tag">{{ tag }}</span>
+					<span class="label label-default bg-dark text-light rounded-3 p-1 m-1" v-for="tag in thisBeer.tagline.split('. ')" v-bind:key="tag">{{ tag }}</span>
 				</div>
 				<div class="text-start mt-5">
 					<span class="fw-bold" style="font-size: 20px">Brewed for the first time:</span><span
@@ -28,8 +27,8 @@
 			View more
 		</button>
 		<div class="collapse" v-bind:id="'collapse-' + thisBeer.id">
-			<div class="card card-body mt-3 mb-3">
-				<div>
+			<div class="card card-body m-3">
+				<div class="mb-3">
 					<div class="text-start mt-4">
 						<h3>Informations:</h3>
 					</div>
