@@ -8,15 +8,6 @@
 			<div class="row mt-3">
 				<BeerDisplay/>
 			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
 		</div>
 	</div>
 </template>
