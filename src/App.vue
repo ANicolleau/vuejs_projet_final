@@ -1,44 +1,25 @@
 <template>
-	<div class="row mt-3">
-		<div class="col bg-info" style="height: 500px">
-		</div>
-	</div>
-	<div class="row mt-3">
-		<div class="col bg-dark p-5">
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-			<div class="row mt-3">
-				<BeerDisplay/>
-			</div>
-		</div>
-	</div>
+  <TheBeersPage/>
 </template>
 
 <script>
-import BeerDisplay from "@/components/BeerDisplay";
+import TheBeersPage from "@/components/TheBeersPage";
 
 export default {
-	name: 'App',
-	components: {
-		BeerDisplay
-	}
+  name: 'App',
+  components: {
+    TheBeersPage
+  }
 }
 </script>
 
 <style>
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 
 }
 </style>

@@ -82,6 +82,9 @@
 <script>
 export default {
 	name: "BeerDisplay",
+  props:{
+    thisBeer: Object
+  },
 	data() {
 		return {
 			id: 192,
