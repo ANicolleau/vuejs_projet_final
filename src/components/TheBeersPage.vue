@@ -94,6 +94,7 @@ export default {
 				.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20" + filters)
 				.then(response => {
 					this.beers = response.data;
+					this.isLastPage = response.data.length !== 20;
 				})
 				.catch(error => {
 					console.log(error)
@@ -122,7 +123,7 @@ export default {
 				this.filters[key] = value;
 			})
 		},
-		changeBeerPage: function (pageIndex) {
+		changeBeerPage: function (pageIndex, changePageEvent) {
 			const filters = this.getFilteredBears()
 			axios
 				.get('https://api.punkapi.com/v2/beers?page=' + pageIndex + "&per_page=20" + filters)
@@ -138,6 +139,7 @@ export default {
 					this.errored = true
 				})
 				.finally(() => {
+					this.updatePagination(changePageEvent)
 					this.loading = false;
 				})
 			window.scrollTo(0, 0);
@@ -146,19 +148,31 @@ export default {
 			this.nbBeerBeginPage = 1;
 			this.nbBeerEndPage = 20;
 		},
-		previousPage: function () {
-			if (this.actualPage !== 1) {
-				this.nbBeerBeginPage -= 20;
-				this.nbBeerEndPage -= 20;
+		updatePagination: function (changePageEvent) {
+			switch (changePageEvent) {
+				case "previousPage":
+					if (this.actualPage !== 1 && this.beers.length) {
+						this.nbBeerBeginPage = (this.actualPage * 20) - 19;
+						this.nbBeerEndPage = this.actualPage * 20;
+					} else {
+						this.resetPagination()
+					}
+					break;
+				case "nextPage":
+					if (this.beers.length) {
+						this.nbBeerBeginPage = (this.actualPage * 20) - 19;
+						this.nbBeerEndPage = this.actualPage * 20;
+					}
+					break;
 			}
-			this.changeBeerPage(this.actualPage - 1)
+		},
+		previousPage: function () {
+			this.changeBeerPage(this.actualPage - 1, "previousPage")
+
 		},
 		nextPage: function () {
-			if (!this.isLastPage) {
-				this.nbBeerBeginPage += 20;
-				this.nbBeerEndPage += 20;
-			}
-			this.changeBeerPage(this.actualPage + 1)
+			this.changeBeerPage(this.actualPage + 1, "nextPage")
+
 		},
 		getFilteredBears: function () {
 			let filters = "";
