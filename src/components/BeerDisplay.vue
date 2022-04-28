@@ -3,8 +3,17 @@
 		<div class="row p-2">
 			<div class="col-2">
 				<div
-					style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% ); border-radius: 15px;"
-					class="m-2"><img v-bind:src="thisBeer.image_url" class="img-fluid p-3" style="max-width: 200px; max-height: 300px" alt="Responsive image"></div>
+					style="height: 300px; background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% ); border-radius: 15px;"
+					class="m-2">
+					<img v-if="thisBeer.image_url" v-bind:src="thisBeer.image_url" class="img-fluid p-3" style="max-width: 200px; max-height: 300px;height: 300px;" alt="Responsive image">
+					<table v-else class="h-100 w-100">
+						<tbody>
+							<tr>
+								<td class="align-middle text-light text-center">NO IMAGE FOUND</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="col-10">
 				<h2 class="text-start mt-3">{{ thisBeer.name }}</h2>
