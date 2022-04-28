@@ -22,7 +22,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="row m-2 bg-light" style="border: solid 1px lightgrey; border-radius: 25px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;height: 65vh; overflow: scroll">
+		<div class="row m-2 bg-light" style="border: solid 1px lightgrey; border-radius: 25px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;height: 50vh; overflow: auto">
 			<div class="col-12">
 				<div v-if="loading">Chargement...</div>
 				<div class="row mt-3" v-for="beer in beers" :key="beer.id">
@@ -78,6 +78,7 @@ export default {
 	watch: {
 		filtersFromHeader: function () {
 			this.updateFiltersFromHeaderFilters();
+			this.resetPagination();
 			this.actualPage = 1
 			let filters = "";
 			for (const [filterName, filterValue] of Object.entries(this.filters)) {
@@ -101,7 +102,6 @@ export default {
 				.finally(() => {
 					this.loading = false;
 				})
-			window.scrollTo(0, 0);
 		}
 	},
 	mounted() {
@@ -141,6 +141,10 @@ export default {
 					this.loading = false;
 				})
 			window.scrollTo(0, 0);
+		},
+		resetPagination: function () {
+			this.nbBeerBeginPage = 1;
+			this.nbBeerEndPage = 20;
 		},
 		previousPage: function () {
 			if (this.actualPage !== 1) {
