@@ -36,7 +36,7 @@
 					<div>Malt: {{ maltSelected }}</div>
 
 					<select class="dropdown-menu-dark w-100" v-model="maltSelected">
-						<option disabled value="">Please select one</option>
+						<option value="">Please select one</option>
 						<option v-for="maltName in MALTS" :key="maltName">{{ maltName }}</option>
 					</select>
 				</div>
@@ -44,7 +44,7 @@
 					<div>Hops: {{ hopsSelected }}</div>
 
 					<select class="dropdown-menu-dark w-100" v-model="hopsSelected">
-						<option disabled value="">Please select one</option>
+						<option value="">Please select one</option>
 						<option v-for="hopsName in HOPS" :key="hopsName">{{ hopsName }}</option>
 					</select></div>
 			</div>
@@ -53,25 +53,32 @@
 					<div>Yeast: {{ yeastSelected }}</div>
 
 					<select class="dropdown-menu-dark w-100" v-model="yeastSelected">
-						<option disabled value="">Please select one</option>
+						<option value="">Please select one</option>
 						<option v-for="yeastName in YEASTS" :key="yeastName">{{ yeastName }}</option>
 					</select></div>
 				<div class="col-6">
 					<div>Food Pairing: {{ foodPairingSelected }}</div>
 
 					<select class="dropdown-menu-dark w-100" v-model="foodPairingSelected">
-						<option disabled value="">Please select one</option>
+						<option value="">Please select one</option>
 						<option v-for="foodName in FOODS" :key="foodName">{{ foodName }}</option>
 					</select></div>
 			</div>
 			<div class="row align-items-center" style="height: 83px">
 				<div class="col-6 align-middle">
 					<div>Search name of beer:</div>
-					<input class="dropdown-menu-dark w-100" v-model="message" placeholder="edit me"/>
+					<input class="dropdown-menu-dark w-100" v-model="beerName" placeholder="edit me"/>
 				</div>
 				<div class="col-6 align-middle">
 					<br>
-					<button class="btn btn-success w-100" @click="OnChangeFilters">Search</button>
+					<div class="row">
+						<div class="col-6 align-middle">
+							<button class="btn btn-warning w-100" @click="ClearFilters">Clear filters</button>
+						</div>
+						<div class="col-6 align-middle">
+							<button class="btn btn-success w-100" @click="ChangeFilters">Search</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -86,9 +93,9 @@ export default {
 	name: "FilterPanel",
 	data() {
 		return {
-			value_abv: [4, 7],
-			value_ibu: [30, 70],
-			value_ebc: [30, 70],
+			value_abv: [1, 20],
+			value_ibu: [1, 160],
+			value_ebc: [1, 150],
 			format: {
 				decimals: 2
 			},
@@ -96,6 +103,7 @@ export default {
 			hopsSelected: "",
 			yeastSelected: "",
 			foodPairingSelected: "",
+			beerName: "",
 			MALTS: ['Maris Otter Extra Pale', 'Caramalt', 'Munich', 'Propino Pale Malt', 'Wheat Malt', 'Propino Pale Malt for kettle souring', 'Acidulated Malt for kettle souring', 'Extra Pale', 'Dark Crystal', 'Lager Malt', 'Wheat', 'Chocolate', 'Carafa Special Malt Type 3', 'Acidulated Malt', 'Flaked Oats', 'Crystal', 'Peated Malt', 'Amber', 'Brown', 'Crystal 150', 'Pale Ale', 'Smoked Weyermann', 'Carafa Special Malt Type 1', 'Dark Crystal 350-400', 'Pale Ale - Tipple', 'Extra Pale - Spring Blend', 'Roasted Barley', 'Smoked Malt', 'Crystal 120', 'Honey', 'Rye', 'Pale Crystal', 'Weyermann Beech Smoked', 'Popcorn', 'Pale Chocolate', 'Torrified Wheat', 'Smoked Peaty', 'Dextrose', 'Black Malt', 'Special W', 'Dark Crystal 350', 'Black Patent', 'Pilsner', 'Dextrin Malt', 'Maris Otter', 'CaraAroma', 'Caramunich', 'Weyermann Smoked', 'Smoked Warminster', 'Ginger Root', 'Organic Lager', 'Organic Caramalt', 'Organic Munich', 'Organic Chocolate', 'Lactose', 'Roasted Malt', 'Cascara', 'Carared', 'Carafa Special Malt Type 2', 'White Cane Sugar', 'Pale Crystal 60', 'Pinhead Oats', 'Carahell', 'Flaked Malted Oats', 'Premium English Caramalt', 'DRC', 'Dark Muscavado (Wort Kettle)', 'Cane Sugar', 'Double Roasted Crystal', 'Simpsons Rye', 'Medium Crystal', 'Crisp Rye', 'Extra Dark Crystal', 'Uncrushed Wheat', 'Golden Naked Oats', 'White Wheat', 'Spelt', 'Light Crystal', 'Chocolate Wheat', 'Carapils', 'Oat Husks', 'Bitter Orange', 'Sweet Orange Peel', 'Grapefruit Peel', 'Weyermann Special III', 'Munich Type 1 Light', 'Vienna', 'Grano Dei Miracoli'],
 			YEASTS: ['Wyeast 1056 - American Ale™', 'Wyeast 2007 - Pilsen Lager™', 'Wyeast 3711 - French Saison™', 'Wyeast 3522 - Belgian Ardennes™', 'Saflager S189', 'Wyeast 1272 - American Ale II™', 'Wyeast 3333 - German Wheat™', 'Wyeast 3638 - Bavarian Wheat™', 'WLP500 - Monastery Ale', 'Wyeast 1010 - American Wheat™', 'WLP099 - Super High Gravity Ale', 'Wyeast 3787 - Trappist High Gravity™', 'Safale US-05', 'WLP351 - Bavarian Weizen', 'Champagne', 'Wyeast 1056 - American Ale™ & Wyeast 1272 - American Ale II™', 'Wyeast 3944 - Belgian Witbier™', 'Wyeast 3724 - Belgian Saison™', 'Westvleteren 12 (recovered from a bottle)', 'Wyeast 1388 - Belgian Strong Ale™', 'Wyeast 2124 - Bohemian Lager™', 'WLP4000 - Vermont Ale', 'Wyeast 2126 - Bohemian Lager™', 'WLP013 - London Ale', 'Saflager W-34/70'],
 			HOPS: ['Fuggles', 'First Gold', 'Cascade', 'Amarillo', 'Simcoe', 'Motueka', 'Bramling Cross', 'Centennial', 'Saaz', 'Nelson Sauvin', 'Peppercorns', 'Tomahawk', 'Magnum', 'Hersbrucker', 'Honey', 'Lactose', 'Citra', 'Columbus Extract', 'Columbus', 'Willamette', 'Galena', 'Hop Extract', 'Chinook', 'Mt.Hood', 'Challenger', 'Waimea', 'Ahtanum', 'Crystal', 'Sorachi Ace', 'Coffee', 'HBC 369', 'Dana', 'Hallertauer MittelfrÃ¼h', 'Kohatu', 'Blackberry Concentrate', 'Sour Cherry Puree', 'Mosaic', 'CO2 Extract', 'Goldings', 'Bobek', 'Ginger', 'Orange Peel', 'Mandarina Bavaria', 'Coffee Beans', 'Pacifica', 'Pacific Jade', 'Vic Secret', 'Comet', 'Guarana Powder', 'Kola Nut Powder', 'Poppy Seed', 'Heather Honey', 'Nugget', 'Liberty', 'Bravo', 'EXP 366', 'Strisselspalt', 'Bramling Cross/ First Gold', 'HBC 366', 'NZ Nelson Sauvin', 'Juniper Berries', 'Galaxy', 'Coffee beans', 'C02 Extract', 'Pioneer', 'Cascara', 'Ella', 'Jester', 'Hercules', 'Pacific Hallertau', 'Tettnang', 'Enigma', 'Ginger Powder', 'Cold Infused Coffee', 'East Kent Goldings', 'Jasmine', 'Blueberries', 'Styrian Goldings', 'Green Bullet', 'Pacific Gem', 'Bay Leaves', 'Rosemary', 'Elderflower', 'El Dorado', 'Perle', 'Equinox', 'Habanero powder', 'Coriander seed', 'Coriander Seed', 'Mango', '1 lemon drop chilli', 'Lemon Peel', 'Coriander', 'Peppercorn', 'Juniper Berry', 'Apollo', 'Dark Muscavado', 'Sterling', 'Pink Peppercorns', 'Bitter Orange Peel', 'Oat Husks', 'Cacoa Nibs', 'Vanilla', 'Sweet Orange Peel', 'Vanilla Extract', 'Cacao Nibs', 'Apricot Juice', 'Peach Juice', 'Coriander Seeds', 'Lemon Concentrate', 'American Oak Chips Medium Toast Soaked In Speyside Whisky', 'Black Pepper', 'Cardamon', 'Nutmeg', 'Cinnamon', 'Star Anis', 'Ariana', 'Callista', 'Ground Coffee', 'Cocoa Nibs', 'Oak Chips', 'Milk Sugars', 'Raspberry Juice', 'Golden Honey', 'American Oak Chips Medium Toast Soaked in Bourbon', 'Hallertauer Blanc', 'Cloudberries', 'American Oak Chips Heavy Toast Soaked in Bourbon', 'Coconut Extract', 'Pineapple Juice', 'Muscovado Sugar', 'Cold Brew Coffee', 'Blueberry Juice', 'Fresh Strawberries', 'Blackcurrant Concentrate', 'Lingonberry Juice', 'Seville Orange Juice', 'Elderflower Concentrate', 'Lemon Juice', 'Mandarin Segements', 'American Oak Chips Medium Toast soaked in Speyside Whisky', 'American Oak Chips Heavy Toast soaked in Speyside Whisky', 'Cinnamon Powder', 'Habenero Powder', 'Peach Concentrate', 'Mango Concentrate', 'Spalter', 'Saphire', 'American Oak Wood- chip medium toast, Ageing soaked in Bourbon', 'American Oak Wood- chip medium toast, Ageing soaked in Rye Whisky', 'Maple Syrup', 'Sodium Chloride', 'Tangerine Extract', 'German Cascade', 'Huell Melon', 'German Comet', 'Cold infused coffee', 'Habanero', 'Lemon drop chili', 'Demerara Sugar', 'Marshmallows', 'Idaho 7', 'Mango Puree', 'Plum Concentrate', 'French Oak Chips Medium Toast', 'East Kent Golding'],
@@ -107,7 +115,7 @@ export default {
 		Slider
 	},
 	methods: {
-		OnChangeFilters() {
+		ChangeFilters() {
 			this.$emit('filtersChange', {
 				malt: this.maltSelected,
 				hops: this.hopsSelected,
@@ -119,7 +127,18 @@ export default {
 				ibu_lt: this.value_ibu[1],
 				ebc_gt: this.value_ebc[0],
 				ebc_lt: this.value_ebc[1],
+				beer_name: this.beerName
 			})
+		},
+		ClearFilters() {
+			this.value_abv = [1, 20];
+			this.value_ibu = [1, 160];
+			this.value_ebc = [1, 150];
+			this.maltSelected = "";
+			this.hopsSelected = "";
+			this.yeastSelected = "";
+			this.foodPairingSelected = "";
+			this.beerName = "";
 		}
 	}
 }

@@ -25,7 +25,8 @@
 		<div id="beer_container" class="row m-2 bg-light" style="border: solid 1px lightgrey; border-radius: 25px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;height: 50vh; overflow: auto">
 			<div class="col-12">
 				<div v-if="loading">Chargement...</div>
-				<div class="row mt-3" v-for="beer in beers" :key="beer.id">
+				<div v-else-if="beers.length === 0">No beer found</div>
+				<div v-else class="row mt-3" v-for="beer in beers" :key="beer.id">
 					<div class="col-12 p-3">
 						<BeerDisplay :thisBeer="beer"/>
 					</div>
