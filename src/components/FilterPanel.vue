@@ -4,7 +4,7 @@
 			<div class="row align-items-center" style="height: 83px">
 				<div class="col-5"><h5>ABV (Alcohol By Volume)</h5></div>
 				<div class="col-7">
-					<Slider v-model="value"
+					<Slider v-model="value_abv"
 							:min="1"
 							:max="20"
 							:step="0.25"
@@ -71,7 +71,7 @@
 				</div>
 				<div class="col-6 align-middle">
 					<br>
-					<button class="btn btn-success w-100">Search</button>
+					<button class="btn btn-success w-100" @click="OnChangeFilters">Search</button>
 				</div>
 			</div>
 		</div>
@@ -81,12 +81,12 @@
 
 <script>
 import Slider from "@vueform/slider";
-import filterStore from "../store/filters"
+
 export default {
 	name: "FilterPanel",
 	data() {
 		return {
-			value: [4, 7],
+			value_abv: [4, 7],
 			value_ibu: [30, 70],
 			value_ebc: [30, 70],
 			format: {
@@ -106,9 +106,22 @@ export default {
 	components: {
 		Slider
 	},
-	store: {
-		filterStore
-	},
+	methods: {
+		OnChangeFilters() {
+			this.$emit('filtersChange', {
+				malt: this.maltSelected,
+				hops: this.hopsSelected,
+				yeast: this.yeastSelected,
+				foodPairing: this.foodPairingSelected,
+				abv_gt: this.value_abv[0],
+				abv_lt: this.value_abv[1],
+				ibu_gt: this.value_ibu[0],
+				ibu_lt: this.value_ibu[1],
+				ebc_gt: this.value_ebc[0],
+				ebc_lt: this.value_ebc[1],
+			})
+		}
+	}
 }
 </script>
 

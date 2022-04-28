@@ -38,14 +38,14 @@
 <script>
 import BeerDisplay from "./BeerDisplay"
 import axios from 'axios';
-import filterStore from "@/store/filters";
+
 export default {
 	name: "TheBeersPage",
 	components: {
 		BeerDisplay
 	},
-	store: {
-		filterStore
+	props: {
+		filtersFromHeader: Object
 	},
 	data() {
 		return {
@@ -75,8 +75,35 @@ export default {
 			}
 		}
 	},
-	filters: {},
-	computed: {},
+	watch: {
+		filtersFromHeader: function () {
+			this.updateFiltersFromHeaderFilters();
+			this.actualPage = 1
+			let filters = "";
+			for (const [filterName, filterValue] of Object.entries(this.filters)) {
+				if (filterValue) {
+					filters += `&${filterName}=${filterValue}`
+				}
+			}
+			if (!filters) {
+				console.log("No filter")
+				return;
+			}
+			axios
+				.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20" + filters)
+				.then(response => {
+					this.beers = response.data;
+				})
+				.catch(error => {
+					console.log(error)
+					this.errored = true
+				})
+				.finally(() => {
+					this.loading = false;
+				})
+			window.scrollTo(0, 0);
+		}
+	},
 	mounted() {
 		axios
 			.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20")
@@ -90,6 +117,11 @@ export default {
 			.finally(() => this.loading = false)
 	},
 	methods: {
+		updateFiltersFromHeaderFilters: function () {
+			Object.entries(this.filtersFromHeader).forEach(([key, value]) => {
+				this.filters[key] = value;
+			})
+		},
 		changeBeerPage: function (pageIndex) {
 			const filters = this.getFilteredBears()
 			axios
@@ -126,40 +158,12 @@ export default {
 		},
 		getFilteredBears: function () {
 			let filters = "";
-			this.filters.abv_gt = 6;
 			for (const [filterName, filterValue] of Object.entries(this.filters)) {
 				if (filterValue) {
 					filters += `&${filterName}=${filterValue}`
 				}
 			}
 			return filters;
-		},
-		applyFilters: function () {
-			this.actualPage = 1
-			let filters = "";
-			this.filters.abv_gt = 5;
-			for (const [filterName, filterValue] of Object.entries(this.filters)) {
-				if (filterValue) {
-					filters += `&${filterName}=${filterValue}`
-				}
-			}
-			if (!filters) {
-				console.log("No filter")
-				return;
-			}
-			axios
-				.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20" + filters)
-				.then(response => {
-					this.beers = response.data;
-				})
-				.catch(error => {
-					console.log(error)
-					this.errored = true
-				})
-				.finally(() => {
-					this.loading = false;
-				})
-			window.scrollTo(0, 0);
 		}
 	}
 }

@@ -1,12 +1,12 @@
 <template>
 	<div class="row m-0 p-0 mt-3">
 		<div class="col-12">
-			<FilterPanel/>
+			<FilterPanel @filtersChange="updateFilters"/>
 		</div>
 	</div>
 	<div class="row m-0 p-0 mt-3">
 		<div class="col-12">
-			<TheBeersPage/>
+			<TheBeersPage :filtersFromHeader="filters"/>
 		</div>
 	</div>
 </template>
@@ -20,6 +20,16 @@ export default {
 	components: {
 		TheBeersPage,
 		FilterPanel,
+	},
+	data() {
+		return {
+			filters: {}
+		}
+	},
+	methods: {
+		updateFilters(filters) {
+			this.filters = filters
+		}
 	}
 }
 </script>
