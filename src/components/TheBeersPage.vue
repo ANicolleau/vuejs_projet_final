@@ -22,7 +22,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="row m-2 bg-light" style="border: solid 1px lightgrey; border-radius: 25px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;height: 50vh; overflow: auto">
+		<div id="beer_container" class="row m-2 bg-light" style="border: solid 1px lightgrey; border-radius: 25px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;height: 50vh; overflow: auto">
 			<div class="col-12">
 				<div v-if="loading">Chargement...</div>
 				<div class="row mt-3" v-for="beer in beers" :key="beer.id">
@@ -94,6 +94,7 @@ export default {
 				.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20" + filters)
 				.then(response => {
 					this.beers = response.data;
+					this.goScrollTop();
 				})
 				.catch(error => {
 					console.log(error)
@@ -102,6 +103,7 @@ export default {
 				.finally(() => {
 					this.loading = false;
 				})
+
 		}
 	},
 	mounted() {
@@ -109,12 +111,14 @@ export default {
 			.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20")
 			.then(response => {
 				this.beers = response["data"];
+				this.goScrollTop();
 			})
 			.catch(error => {
 				console.log(error)
 				this.errored = true
 			})
 			.finally(() => this.loading = false)
+
 	},
 	methods: {
 		updateFiltersFromHeaderFilters: function () {
@@ -132,6 +136,7 @@ export default {
 						this.actualPage = pageIndex;
 					}
 					this.isLastPage = response.data.length !== 20;
+					this.goScrollTop();
 				})
 				.catch(error => {
 					console.log(error)
@@ -140,7 +145,6 @@ export default {
 				.finally(() => {
 					this.loading = false;
 				})
-			window.scrollTo(0, 0);
 		},
 		resetPagination: function () {
 			this.nbBeerBeginPage = 1;
@@ -168,6 +172,9 @@ export default {
 				}
 			}
 			return filters;
+		},
+		goScrollTop: function () {
+			document.getElementById("beer_container").scrollTop = 0;
 		}
 	}
 }
