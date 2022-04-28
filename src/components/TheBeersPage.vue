@@ -7,17 +7,17 @@
 	<section v-else>
 		<div class="mb-3 row justify-content-md-center">
 			<div class="col-1">
-				<button class="page-link btn {{actualPage === 1 ? 'disabled' : ''}}" href="#" :disabled="actualPage === 1" @click="previousPage">
+				<button class="btn btn-dark {{actualPage === 1 ? 'disabled' : ''}}" href="#" :disabled="actualPage === 1" @click="previousPage">
 					Previous
 				</button>
 			</div>
 			<div class="col-1">
-				<button class="page-link">
+				<button class="btn btn-dark disabled">
 					{{ nbBeerBeginPage }} - {{ nbBeerEndPage }}
 				</button>
 			</div>
 			<div class="col-1">
-				<button class="page-link btn {{isLastPage ? 'disabled' : ''}}" href="#" :disabled="isLastPage" @click="nextPage">
+				<button class="btn btn-dark {{isLastPage ? 'disabled' : ''}}" href="#" :disabled="isLastPage" @click="nextPage">
 					Next
 				</button>
 			</div>
