@@ -4,29 +4,50 @@
 			<div class="row align-items-center" style="height: 83px">
 				<div class="col-5"><h5>ABV (Alcohol By Volume)</h5></div>
 				<div class="col-7">
-					<Slider v-model="value_abv"
-							:min="0"
-							:max="30"
-							:step="0.25"
-							:format="format"/>
+					<div class="row align-items-center">
+						<div class="col-1">
+							<input type="checkbox" id="checkboxAbv" checked v-model="abvChecked">
+						</div>
+						<div class="col-11">
+							<Slider :disabled="!abvChecked" v-model="value_abv"
+									:min="0"
+									:max="30"
+									:step="0.25"
+									:format="format"/>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row align-items-center" style="height: 83px">
 				<div class="col-5"><h5>IBU (International Bitterness Unit)</h5></div>
 				<div class="col-7">
-					<Slider v-model="value_ibu"
-							:min="0"
-							:max="200"
-							:step="1"/>
+					<div class="row align-items-center">
+						<div class="col-1">
+							<input type="checkbox" id="checkboxIbu" checked v-model="ibuChecked">
+						</div>
+						<div class="col-11">
+							<Slider :disabled="!ibuChecked" v-model="value_ibu"
+									:min="0"
+									:max="200"
+									:step="1"/>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row align-items-center" style="height: 83px">
 				<div class="col-5"><h5>EBC (European Brewery Convention)</h5></div>
 				<div class="col-7">
-					<Slider v-model="value_ebc"
-							:min="0"
-							:max="350"
-							:step="1"/>
+					<div class="row align-items-center">
+						<div class="col-1">
+							<input type="checkbox" id="checkboxEbc" checked v-model="ebcChecked">
+						</div>
+						<div class="col-11">
+							<Slider :disabled="!ebcChecked" v-model="value_ebc"
+									:min="0"
+									:max="350"
+									:step="1"/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
