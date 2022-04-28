@@ -7,7 +7,7 @@
 	<section v-else>
 		<div class="mb-3 row justify-content-md-center">
 			<div class="col-1">
-				<button class="page-link" href="#" :disabled="actualPage === 1" @click="previousPage">
+				<button class="page-link btn {{actualPage === 1 ? 'disabled' : ''}}" href="#" :disabled="actualPage === 1" @click="previousPage">
 					Previous
 				</button>
 			</div>
@@ -17,7 +17,7 @@
 				</button>
 			</div>
 			<div class="col-1">
-				<button class="page-link" href="#" :disabled="isLastPage" @click="nextPage">
+				<button class="page-link btn {{isLastPage ? 'disabled' : ''}}" href="#" :disabled="isLastPage" @click="nextPage">
 					Next
 				</button>
 			</div>
@@ -79,7 +79,6 @@ export default {
 	watch: {
 		filtersFromHeader: function () {
 			this.updateFiltersFromHeaderFilters();
-			this.resetPagination();
 			this.actualPage = 1
 			let filters = "";
 			for (const [filterName, filterValue] of Object.entries(this.filters)) {
@@ -103,6 +102,7 @@ export default {
 					this.errored = true
 				})
 				.finally(() => {
+					this.updatePagination("filtersFromHeader")
 					this.loading = false;
 				})
 		}
@@ -118,7 +118,9 @@ export default {
 				console.log(error)
 				this.errored = true
 			})
-			.finally(() => this.loading = false)
+			.finally(() => {
+				this.loading = false
+			})
 	},
 	methods: {
 		updateFiltersFromHeaderFilters: function () {
@@ -164,8 +166,25 @@ export default {
 				case "nextPage":
 					if (this.beers.length) {
 						this.nbBeerBeginPage = (this.actualPage * 20) - 19;
-						this.nbBeerEndPage = this.actualPage * 20;
+
+						if (this.isLastPage) {
+							this.nbBeerEndPage = (this.nbBeerBeginPage - 1) + this.beers.length;
+							console.log(this.nbBeerEndPage)
+						} else {
+							this.nbBeerEndPage = this.actualPage * 20;
+						}
 					}
+					break;
+				case "filtersFromHeader":
+					if (this.beers.length) {
+						if (this.isLastPage) {
+							this.nbBeerBeginPage = 1;
+							this.nbBeerEndPage = this.beers.length;
+						} else {
+							this.resetPagination();
+						}
+					}
+
 					break;
 			}
 		},

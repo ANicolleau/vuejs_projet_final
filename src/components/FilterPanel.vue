@@ -5,8 +5,8 @@
 				<div class="col-5"><h5>ABV (Alcohol By Volume)</h5></div>
 				<div class="col-7">
 					<Slider v-model="value_abv"
-							:min="1"
-							:max="20"
+							:min="0"
+							:max="30"
 							:step="0.25"
 							:format="format"/>
 				</div>
@@ -15,8 +15,8 @@
 				<div class="col-5"><h5>IBU (International Bitterness Unit)</h5></div>
 				<div class="col-7">
 					<Slider v-model="value_ibu"
-							:min="1"
-							:max="160"
+							:min="0"
+							:max="200"
 							:step="1"/>
 				</div>
 			</div>
@@ -24,8 +24,8 @@
 				<div class="col-5"><h5>EBC (European Brewery Convention)</h5></div>
 				<div class="col-7">
 					<Slider v-model="value_ebc"
-							:min="1"
-							:max="140"
+							:min="0"
+							:max="350"
 							:step="1"/>
 				</div>
 			</div>
@@ -93,9 +93,9 @@ export default {
 	name: "FilterPanel",
 	data() {
 		return {
-			value_abv: [1, 20],
-			value_ibu: [1, 160],
-			value_ebc: [1, 150],
+			value_abv: [0, 30],
+			value_ibu: [0, 200],
+			value_ebc: [0, 350],
 			format: {
 				decimals: 2
 			},
