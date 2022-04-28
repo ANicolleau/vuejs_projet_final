@@ -86,10 +86,6 @@ export default {
 					filters += `&${filterName}=${filterValue}`
 				}
 			}
-			if (!filters) {
-				console.log("No filter")
-				return;
-			}
 			axios
 				.get('https://api.punkapi.com/v2/beers?page=' + this.actualPage + "&per_page=20" + filters)
 				.then(response => {
@@ -124,6 +120,7 @@ export default {
 	},
 	methods: {
 		updateFiltersFromHeaderFilters: function () {
+			this.filters = {}
 			Object.entries(this.filtersFromHeader).forEach(([key, value]) => {
 				this.filters[key] = value;
 			})
